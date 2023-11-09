@@ -2,32 +2,87 @@
 <html lang="ja">
     <head>
         <meta charset="UTF-8">
-        <title>persona Edit</title>
+        <title>Edit Vehicle</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f2f2f2;
+                margin: 0;
+                padding: 0;
+            }
+
+            h2 {
+                background-color: #333;
+                color: #fff;
+                padding: 10px;
+            }
+
+            table {
+                border-collapse: collapse;
+                width: 100%;
+                margin: 20px auto;
+                background-color: #fff;
+            }
+
+            th,
+            td {
+                border: 1px solid #ccc;
+                padding: 8px;
+                text-align: center;
+            }
+
+            th {
+                background-color: #333;
+                color: #fff;
+            }
+
+            tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+
+            a {
+                text-decoration: none;
+                color: #007bff;
+            }
+
+            a:hover {
+                text-decoration: underline;
+            }
+        </style>
     </head>
     <body>
-        <!--formの％は全て消した状態で行うか？-->
-        <h1>更新フォーム</h1>
-        <form action="/update/<%= persona[0] %>" method="POST" id="updateForm">
-        </form>
-        <button type="submit">更新</button>
-        <script>
-            persona = [];
-            // JavaScriptコードブロック内でエラーハンドリングとコンソールログを追加
-            try {
-                // ページがロードされたらpersona情報を取得
-                fetch("/edit/<%= persona.id %>")
-                    .then(response => response.json())
-                    .then(personaData => {
-                        // フォームにデータを埋め込む
-                        document.getElementById("updateForm").action = "/update/" + personaData.id;
-                        // 他のフォーム入力要素にデータを設定
-                    })
-                    .catch(error => {
-                        console.error(error);
-                    });
-            } catch (error) {
-                console.error(error);
-            } console.log(persona[0]);
-        </script>
+        <h2>利用者リスト</h2>
+        <table>
+            <tr>
+                <th>氏名</th>
+                <th>ひらがな</th>
+                <th>住所</th>
+                <th>電話番号</th>
+                <th>利用開始日</th>
+                <th>利用終了予定日</th>
+            </tr>
+            <% users.forEach(function(user) { %>
+                <tr>
+                    <td>
+                        <%= user.name %>
+                    </td>
+                    <td>
+                        <%= user.hiragana %>
+                    </td>
+                    <td>
+                        <%= user.address %>
+                    </td>
+                    <td>
+                        <%= user.phoneNumber %>
+                    </td>
+                    <td>
+                        <%= user.startDate %>
+                    </td>
+                    <td>
+                        <%= user.endDate %>
+                    </td>
+                </tr>
+                <% }); %>
+        </table>
     </body>
 </html>
