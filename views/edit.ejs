@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title>persona Edit</title>
+    </head>
+    <body>
+        <!--formの％は全て消した状態で行うか？-->
+        <h1>更新フォーム</h1>
+        <form action="/update/<%= persona[0] %>" method="POST" id="updateForm">
+        </form>
+        <button type="submit">更新</button>
+        <script>
+            persona = [];
+            // JavaScriptコードブロック内でエラーハンドリングとコンソールログを追加
+            try {
+                // ページがロードされたらpersona情報を取得
+                fetch("/edit/<%= persona.id %>")
+                    .then(response => response.json())
+                    .then(personaData => {
+                        // フォームにデータを埋め込む
+                        document.getElementById("updateForm").action = "/update/" + personaData.id;
+                        // 他のフォーム入力要素にデータを設定
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            } catch (error) {
+                console.error(error);
+            } console.log(persona[0]);
+        </script>
+    </body>
+</html>

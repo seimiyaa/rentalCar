@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title>vehicles List</title>
+    </head>
+    <body>
+        <h1>vehicles List</h1>
+        <table>
+            <tr>
+                <th>purchase_date</th>
+                <th>car_model</th>
+                <th>next_inspection_date</th>
+                <th>mileage</th>
+                <th>next_maintenance_date</th>
+                <th>maintenance_responsible</th>
+            </tr>
+            <% vehicles.forEach(function(vehicle) { %>
+                <tr>
+                    <td>
+                        <%= vehicle.purchase_date.getFullYear() %>-<%= (vehicle.purchase_date.getMonth() + 1).toString().padStart(2, '0' ) %>-<%= vehicle.purchase_date.getDate().toString().padStart(2, '0' ) %>
+                    </td>
+                    <td>
+                        <%= vehicle.car_model %>
+                    </td>
+                    <td>
+                        <%= vehicle.next_inspection_date.getFullYear() %>-<%= (vehicle.next_inspection_date.getMonth() + 1).toString().padStart(2, '0' ) %>-<%= vehicle.next_inspection_date.getDate().toString().padStart(2, '0' ) %>
+                    </td>
+                    <td>
+                        <%= vehicle.mileage %>
+                    </td>
+                    <td>
+                        <%= vehicle.next_maintenance_date.getFullYear() %>-<%= (vehicle.next_maintenance_date.getMonth() + 1).toString().padStart(2, '0' ) %>-<%= vehicle.next_maintenance_date.getDate().toString().padStart(2, '0' ) %>
+                    </td>
+                    <td>
+                        <%= vehicle.maintenance_responsible %>
+                    </td>
+                </tr>
+                <% }); %>
+        </table>
+    </body>
+</html>
