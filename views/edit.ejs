@@ -52,6 +52,7 @@
     </head>
     <body>
         <h2>利用者リスト</h2>
+        <!-- edit.ejs -->
         <table>
             <tr>
                 <th>氏名</th>
@@ -61,25 +62,28 @@
                 <th>利用開始日</th>
                 <th>利用終了予定日</th>
             </tr>
-            <% users.forEach(function(user) { %>
+            <% carusers.forEach(function(caruser) { %>
                 <tr>
                     <td>
-                        <%= user.name %>
+                        <%= caruser.id %>
                     </td>
                     <td>
-                        <%= user.hiragana %>
+                        <%= caruser.name %>
                     </td>
                     <td>
-                        <%= user.address %>
+                        <%= caruser.hiragana %>
                     </td>
                     <td>
-                        <%= user.phoneNumber %>
+                        <%= caruser.address %>
                     </td>
                     <td>
-                        <%= user.startDate %>
+                        <%= caruser.phoneNumber %>
                     </td>
                     <td>
-                        <%= user.endDate %>
+                        <%= caruser.startDate %>
+                    </td>
+                    <td>
+                        <%= caruser.endDate %>
                     </td>
                 </tr>
                 <% }); %>

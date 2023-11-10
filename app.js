@@ -65,43 +65,59 @@ const users = [
 ];
 
 app.get("/", (req, res) => {
-  const sql = "SELECT * FROM vehicles";
-  con.query(sql, function (err, vehicles, fields) {
-    if (err) throw err;
-    res.render("index", {
-      vehicles: vehicles,
+  const vehiclesSql = "SELECT * FROM vehicles";
+  const carusersSql = "SELECT * FROM carusers";
+
+  con.query(vehiclesSql, function (errVehicles, vehicles, fieldsVehicles) {
+    if (errVehicles) throw errVehicles;
+
+    con.query(carusersSql, function (errCarusers, carusers, fieldsCarusers) {
+      if (errCarusers) throw errCarusers;
+
+      res.render("index", {
+        vehicles: vehicles,
+        carusers: carusers,
+      });
     });
   });
 });
-
-app.get("/", (req, res) => {
-  const sql = "SELECT * FROM carusers";
-  con.query(sql, function (err, carusers, fields) {
-    if (err) throw err;
-    res.render("index", {
-      carusers: carusers,
-    });
-  });
-});
-
-
 
 app.post("/", (req, res) => {
-  const sql = "INSERT INTO vehicles SET ?";
-  con.query(sql, req.body, function (err, vehicles, fields) {
-    if (err) throw err;
-    console.log(vehicles);
-    res.redirect("/");
-  });
+  const vehiclesSql = "INSERT INTO vehicles SET ?";
+  con.query(
+    vehiclesSql,
+    req.body,
+    function (errVehicles, vehicles, fieldsVehicles) {
+      if (errVehicles) throw errVehicles;
+      console.log("Inserted into vehicles:", vehicles);
+
+      const carusersSql = "INSERT INTO carusers SET ?";
+      con.query(
+        carusersSql,
+        req.body,
+        function (errCarusers, carusers, fieldsCarusers) {
+          if (errCarusers) throw errCarusers;
+          console.log("Inserted into carusers:", carusers);
+
+          res.redirect("/");
+        }
+      );
+    }
+  );
 });
 
-app.get("/edit/:car_model", (req, res) => {
-  const sql = "SELECT * FROM vehicles WHERE car_model = ?";
-  con.query(sql, [req.params.id], function (err, result, fields) {
-    if (err) throw err;
+
+
+app.get("/edit/:id?", (req, res) => {
+  const Sql = "SELECT * FROM carusers WHERE id = ?";
+  con.query(Sql, [req.params.id], function (err, result, fields) {
+    if (err) {
+      console.error("Error executing query:", err);
+      throw err;
+    }
+    console.log(result);
     res.render("edit", {
-      vehicles: result[0],
-      users: users,
+      carusers: result,
     });
   });
 });
