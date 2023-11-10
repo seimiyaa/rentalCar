@@ -73,6 +73,19 @@ app.get("/", (req, res) => {
     });
   });
 });
+
+app.get("/", (req, res) => {
+  const sql = "SELECT * FROM carusers";
+  con.query(sql, function (err, carusers, fields) {
+    if (err) throw err;
+    res.render("index", {
+      carusers: carusers,
+    });
+  });
+});
+
+
+
 app.post("/", (req, res) => {
   const sql = "INSERT INTO vehicles SET ?";
   con.query(sql, req.body, function (err, vehicles, fields) {
@@ -81,7 +94,6 @@ app.post("/", (req, res) => {
     res.redirect("/");
   });
 });
-
 
 app.get("/edit/:car_model", (req, res) => {
   const sql = "SELECT * FROM vehicles WHERE car_model = ?";
