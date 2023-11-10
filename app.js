@@ -82,9 +82,6 @@ app.post("/", (req, res) => {
   });
 });
 
-app.get("/create", (req, res) => {
-  res.sendFile(path.join(__dirname, "html/form.html"));
-});
 
 app.get("/edit/:car_model", (req, res) => {
   const sql = "SELECT * FROM vehicles WHERE car_model = ?";
@@ -94,24 +91,6 @@ app.get("/edit/:car_model", (req, res) => {
       vehicles: result[0],
       users: users,
     });
-  });
-});
-
-app.post("/update/:id", (req, res) => {
-  const sql = "UPDATE vehicles SET ? WHERE id = " + req.params.id;
-  con.query(sql, req.body, function (err, result, fields) {
-    if (err) throw err;
-    console.log(result);
-    res.redirect("/");
-  });
-});
-
-app.get("/delete/:id", (req, res) => {
-  const sql = "DELETE FROM vehicles WHERE id = ?";
-  con.query(sql, [req.params.id], function (err, result, fields) {
-    if (err) throw err;
-    console.log(result);
-    res.redirect("/");
   });
 });
 
