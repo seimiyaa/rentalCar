@@ -108,9 +108,9 @@ app.post("/", (req, res) => {
 
 
 
-app.get("/edit/:id?", (req, res) => {
-  const Sql = "SELECT * FROM carusers WHERE id = ?";
-  con.query(Sql, [req.params.id], function (err, result, fields) {
+app.get("/edit/:caruserscol?", (req, res) => {
+  const Sql = "SELECT * FROM carusers WHERE caruserscol = ?";
+  con.query(Sql, [req.params.caruserscol], function (err, result, fields) {
     if (err) {
       console.error("Error executing query:", err);
       throw err;

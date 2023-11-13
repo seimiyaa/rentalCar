@@ -67,7 +67,7 @@
                         <%= vehicle.purchase_date.getFullYear() %>-<%= (vehicle.purchase_date.getMonth() + 1).toString().padStart(2, '0' ) %>-<%= vehicle.purchase_date.getDate().toString().padStart(2, '0' ) %>
                     </td>
                     <td>
-                        <a href="/edit/<%= carusers.id %>"><%= vehicle.car_model %><%= carusers.id %></a>
+                        <a href="/edit/<%= vehicle.car_model %>"><%= vehicle.car_model %></a>
                     </td>
                     <td>
                         <%= vehicle.next_inspection_date.getFullYear() %>-<%= (vehicle.next_inspection_date.getMonth() + 1).toString().padStart(2, '0' ) %>-<%= vehicle.next_inspection_date.getDate().toString().padStart(2, '0' ) %>
@@ -84,9 +84,9 @@
                 </tr>
                 <% }); %>
         </table>
-        <table>
+        <!--<table>
             <tr>
-                <th>id</th>
+                <th>車種</th>
                 <th>氏名</th>
                 <th>ひらがな</th>
                 <th>住所</th>
@@ -97,7 +97,7 @@
             <% carusers.forEach(function(caruser) { %>
                 <tr>
                     <td>
-                        <%= caruser.id %>
+                        <%= caruser.caruserscol %>
                     </td>
                     <td>
                         <%= caruser.name %>
@@ -119,6 +119,6 @@
                     </td>
                 </tr>
                 <% }); %>
-        </table>
+        </table>-->
     </body>
 </html>
